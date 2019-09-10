@@ -4,5 +4,15 @@
   "main": "index.js",
   "repository": "https://github.com/hagnerd/webauth-iii-challenge.git",
   "author": "Matt Hagner <web@matthagner.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "knex": "^0.19.4",
+    "sqlite3": "^4.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.2"
+  }
 }
