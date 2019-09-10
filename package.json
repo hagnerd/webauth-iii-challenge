@@ -1,0 +1,8 @@
+{
+  "name": "webauth-iii-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/hagnerd/webauth-iii-challenge.git",
+  "author": "Matt Hagner <web@matthagner.com>",
+  "license": "MIT"
+}
