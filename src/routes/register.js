@@ -1,6 +1,9 @@
 const router = require("express").Router();
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const User = require("../controllers/users");
+
+const secret = process.env.SECRET || "supersecret";
 
 function validateUserInput(req, res, next) {
   const { username, password } = req.body;
@@ -21,11 +24,11 @@ router.post("/", validateUserInput, async (req, res) => {
 
   try {
     const user = await User.createUser({ username, password });
-    /* TODO: remove console.log */
-    console.log(user);
+
+    const token = jwt.sign({ sub: user.id }, secret, { expiresIn: "8h" });
 
     res.status(201).json({
-      user
+      token
     });
   } catch (err) {
     res.status(500).json({
