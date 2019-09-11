@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const bcrypt = require("bcryptjs");
 const User = require("../controllers/users");
 
 function validateUserInput(req, res, next) {
@@ -14,7 +15,9 @@ function validateUserInput(req, res, next) {
 }
 
 router.post("/", validateUserInput, async (req, res) => {
-  const { username, password } = req.body;
+  const { username, password: rawPassword } = req.body;
+
+  const password = bcrypt.hashSync(rawPassword, 12);
 
   try {
     const user = await User.createUser({ username, password });
