@@ -19,7 +19,12 @@ async function getUserByUsername(username) {
   return user ? user : null;
 }
 
+async function getAll() {
+  return db.select("*").from("users");
+}
+
 module.exports = {
   createUser,
-  getUserByUsername
+  getUserByUsername,
+  getAll
 };
