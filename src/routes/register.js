@@ -6,11 +6,11 @@ const User = require("../controllers/users");
 const secret = process.env.SECRET || "supersecret";
 
 function validateUserInput(req, res, next) {
-  const { username, password } = req.body;
+  const { username, password, department } = req.body;
 
-  if (!username || !password) {
+  if (!username || !password || !department) {
     res.status(400).json({
-      message: "Expected username and password"
+      message: "Expected username, password and department"
     });
   } else {
     next();
@@ -18,12 +18,12 @@ function validateUserInput(req, res, next) {
 }
 
 router.post("/", validateUserInput, async (req, res) => {
-  const { username, password: rawPassword } = req.body;
+  const { username, password: rawPassword, department } = req.body;
 
   const password = bcrypt.hashSync(rawPassword, 12);
 
   try {
-    const user = await User.createUser({ username, password });
+    const user = await User.createUser({ username, password, department });
 
     const token = jwt.sign({ sub: user.id }, secret, { expiresIn: "8h" });
 
