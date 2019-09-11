@@ -21,6 +21,7 @@ router.post("/", validateUserInput, async (req, res) => {
 
   try {
     const user = await User.createUser({ username, password });
+    /* TODO: remove console.log */
     console.log(user);
 
     res.status(201).json({

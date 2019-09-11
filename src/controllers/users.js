@@ -10,6 +10,16 @@ async function createUser(input) {
   return user;
 }
 
+async function getUserByUsername(username) {
+  const [user] = await db
+    .select("*")
+    .from("users")
+    .where({ username });
+
+  return user ? user : null;
+}
+
 module.exports = {
-  createUser
+  createUser,
+  getUserByUsername
 };
